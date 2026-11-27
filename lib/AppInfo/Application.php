@@ -30,6 +30,7 @@ class Application extends App implements IBootstrap {
 		] as $event) {
 			$context->registerEventListener($event, JournalListener::class);
 		}
+		$context->registerMiddleware(\OCA\CertexiSync\Service\ArchiveWriteMiddleware::class, true);
 		$context->registerCapability(Capabilities::class);
 	}
 
