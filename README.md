@@ -30,6 +30,8 @@ signed-in user.
 | GET    | `/changes`           | Rows changed and deleted after a position, per table    |
 | POST   | `/tables/{id}/batch` | Up to 500 creates, updates and deletes, one transaction |
 
+Version 0.2.0 adds an authenticated GET at `/tables/{tableId}/views/{viewId}/rows/{rowId}/archive`. It checks the signed-in user’s view and row access before returning the archive flag. Tables API v1 row edits respect the Certexi lifecycle marker. When Certexi Forms already protects these edits, it retains ownership of the write lock.
+
 The capability `certexi_sync.version` tells clients the app is present.
 
 ## Install
@@ -39,4 +41,4 @@ Requires Nextcloud 30–34 with Tables 2.0 or later.
 
 ## Licence
 
-Apache License 2.0. Copyright 2026 Red Sustentable Internacional S.A. de C.V.
+The archive controller, state reader, and write middleware are distributed under the GNU Affero General Public License v3, as in Certexi Forms (see LICENSES/AGPL-3.0.txt). The remaining app code is distributed under the Apache License 2.0. Copyright 2026 Red Sustentable Internacional S.A. de C.V.

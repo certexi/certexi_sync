@@ -7,6 +7,7 @@ declare(strict_types=1);
 
 return [
 	'ocs' => [
+		['name' => 'archive#state', 'url' => '/api/v1/tables/{tableId}/views/{viewId}/rows/{rowId}/archive', 'verb' => 'GET'],
 		['name' => 'api#cursor', 'url' => '/api/v1/cursor', 'verb' => 'GET'],
 		['name' => 'api#changes', 'url' => '/api/v1/changes', 'verb' => 'GET'],
 		['name' => 'api#batch', 'url' => '/api/v1/tables/{tableId}/batch', 'verb' => 'POST'],
