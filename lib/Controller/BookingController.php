@@ -16,12 +16,12 @@ final class BookingController extends OCSController {
         parent::__construct('certexi_sync', $request);
     }
     #[NoAdminRequired]
-    public function bind(int $tableId, string $calendarUri): DataResponse {
+    public function bind(int $tableId, string $calendarUri, int $revision): DataResponse {
         $headers = ['Cache-Control'=>'private, no-store'];
         $owner = $this->session->getUser()?->getUID();
-        if (!$owner || $tableId < 1 || $calendarUri === '' || strlen($calendarUri)>255 || str_contains($calendarUri,'/'))
+        if ($revision < 1 || !$owner || $tableId < 1 || $calendarUri === '' || strlen($calendarUri)>255 || str_contains($calendarUri,'/'))
             return new DataResponse([], 403, $headers);
-        $result = $this->grants->bind($owner, $tableId, $calendarUri);
+        $result = $this->grants->bind($owner, $tableId, $calendarUri, $revision);
         return new DataResponse($result ?? [], $result ? 200 : 403, $headers);
     }
 }
