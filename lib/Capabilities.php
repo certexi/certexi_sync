@@ -12,6 +12,6 @@ use OCP\Capabilities\ICapability;
 class Capabilities implements ICapability {
 	/** @return array{certexi_sync: array{version: int, batchLimit: int}} */
 	public function getCapabilities(): array {
-		return ['certexi_sync' => ['version' => 1, 'batchLimit' => Service\Journal::BATCH_LIMIT]];
+		return ['certexi_sync' => ['version' => 1, 'bookingDelivery' => 1, 'batchLimit' => Service\Journal::BATCH_LIMIT]];
 	}
 }
