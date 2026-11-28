@@ -42,3 +42,9 @@ Requires Nextcloud 30–34 with Tables 2.0 or later.
 ## Licence
 
 The archive controller, state reader, and write middleware are distributed under the GNU Affero General Public License v3, as in Certexi Forms (see LICENSES/AGPL-3.0.txt). The remaining app code is distributed under the Apache License 2.0. Copyright 2026 Red Sustentable Internacional S.A. de C.V.
+
+## Booking calendars
+
+Version 0.3.0 adds calendar delivery for record bookings. In Nextcloud Administration → Additional settings, enter the trusted HTTPS origin of the Certexi booking authority. Administrators can also use `occ config:app:set certexi_sync booking_origin --value=https://certexi.example.com`. Enable normal Nextcloud background jobs. In Certexi, select the companion delivery mode and save the table's scheduling policy while signed in as both table manager and calendar owner.
+
+The app generates a separate credential for the authorized table and calendar, keeps it in sensitive app configuration and returns only its digest. The background job checks the current owner and table management grant before projecting the booking. Calendar events show “Reserved” and the time interval. The app records revisions and native event tags so retries are idempotent and externally edited events can be reported as conflicts. Disabling the table policy stops the feed. Clearing the trusted origin stops this integration for all calendars.
