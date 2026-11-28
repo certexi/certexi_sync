@@ -19,7 +19,7 @@ final class DeliverBookings extends TimedJob {
 
     protected function run($argument): void {
         $grant=$this->grants->load((string)$argument);
-        if (!$grant || $this->grants->origin() !== $grant['origin']) return;
+        if (!$grant || $this->grants->origin(false) !== $grant['origin']) return;
         $client=$this->http->newClient();
         $send=function(array $extra) use ($grant,$client,$argument): array {
             $response=$client->post($grant['origin'].'/api/booking/records/companion', [

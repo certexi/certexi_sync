@@ -17,8 +17,9 @@ final class BookingGrant {
     public function __construct(private IAppConfig $config, private CalDavBackend $dav,
         private IUserManager $users, private PermissionsService $permissions, private ILockingProvider $locks, private IJobList $jobs) {}
 
-    public function origin(): string {
+    public function origin(bool $required = true): string {
         $origin = $this->config->getValueString('certexi_sync', 'booking_origin', '');
+        if ($origin === '' && !$required) return '';
         if (!preg_match('~^https://[a-zA-Z0-9.-]+(?::[0-9]{1,5})?$~D', $origin)) {
             throw new \RuntimeException('Configure the HTTPS booking origin in Nextcloud administration');
         }
